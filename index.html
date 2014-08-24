@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .canvas {
+            background: #f6f6f6;
+            margin: 0 auto;
+
+        }
+        ul{list-style: none;text-align: center;}
+        li {display: inline; margin: 20px;text-align: center;}
+        li:hover{cursor: pointer;background: "#111";}
+    </style>
+</head>
+<body>
+   <div style="margin: 0 auto;text-align: center;">
+       <canvas class="canvas" id="myCanvas"></canvas>
+   </div>
+  <ul>
+      <li onclick="DrawRectangle();">画矩形</li>
+      <li onclick="DrawArc();">画圆</li>
+      <li onclick="DrawTangle()">画三角形</li>
+      <li onclick="Transform();">变形1</li>
+      <li onclick="Move();">移位1</li>
+      <li onclick="TransformXY();">坐标转换</li>
+      <li onclick="SetBackgroundImage();">设置背景图片</li>
+  </ul>
+  <script>
+    var context;
+    var canvas;
+    window.onload = function(){
+        canvas = document.getElementById("myCanvas");
+        canvas.width = 500;
+        canvas.height = 500;
+        context = canvas.getContext("2d");
+    }
+    function DrawRectangle(){
+        canvas.width = 500;
+        canvas.height = 500;
+        context.fillStyle = "yellow";
+        context.fillRect(20,20,100,100);
+    }
+    function DrawArc(){
+        canvas.width = 500;
+        canvas.height = 500;
+        context.beginPath();
+        context.arc(200,200,120,0,Math.PI,true);
+        context.closePath();
+        context.fillStyle = "red";
+        context.fill();
+    }
+
+    function DrawTangle(){
+        canvas.width = 500;
+        canvas.height = 500;
+        context.beginPath();
+        context.moveTo(30,30);
+        context.lineTo(140,160);
+        context.lineTo(160,300);
+        context.closePath();
+        context.strokeStyle = "red";
+        context.stroke();
+    }
+
+    function Transform(){
+        canvas.height = 500;
+        canvas.width = 500;
+
+        context.fillStyle = "rgba(255,0,0,0.1)";
+        context.save();
+         //平移 缩放 旋转  1 2 3
+        context.translate(100, 100);
+        context.scale(1, 0.5);
+        context.rotate(Math.PI / 4);
+        context.fillRect(0, 0, 100, 100);
+        context.restore();
+
+    }
+
+    function Move(){
+        canvas.height = 500;
+        canvas.width = 500;
+        context.fillStyle - "#eee";
+        context.fillRect(0,0,100,200);
+        context.translate(200,200);
+        context.fillRect(0,0,100,200);
+    }
+
+
+    function TransformXY(){
+        canvas.height = 500;
+        canvas.width = 500;
+        context.transform(3,0,0,3,30,30);
+        context.fillStyle = "#fdd";
+        context.fillRect(30,20,100,200);
+
+    }
+
+    function SetBackgroundImage(){
+        canvas.height = 500;
+        canvas.width = 500;
+        var img = new Image();
+        img.onload = function(){
+            context.drawImage(img,0,0,500,500);
+        };
+        img.src = "./5.jpg";
+
+    }
+
+  </script>
+</body>
+</html>
